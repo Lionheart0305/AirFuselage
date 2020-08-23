@@ -13,31 +13,42 @@ import com.lti.airfuselage.service.UserService;
 
 @RestController
 @CrossOrigin
-public class UserControllerImpl  {
-	
+public class UserControllerImpl {
+
 	@Autowired
 	private UserService userService;
 
-	//@RequestMapping(path="/register", method = RequestMethod.POST)
+	// @RequestMapping(path="/register", method = RequestMethod.POST)
 	@PostMapping("/register")
 	public Status register(@RequestBody User user) {
-		Status status= new Status();
+		// Status status= new Status();
 		try {
 			userService.register(user);
+			Status status = new Status();
 			status.setStatus(StatusType.SUCCESS);
-			status.setMessage("Registration Successful");
-		}catch (CustomerServiceException e) {
+			status.setMessage("Registration Successfull");
+			return status;
+			/*
+			 * status.setStatus(StatusType.SUCCESS);
+			 * status.setMessage("Registration Successful");
+			 */
+		} catch (CustomerServiceException e) {
+			/*
+			 * status.setStatus(StatusType.FAILURE); status.setMessage(e.getMessage());
+			 */
+			Status status = new Status();
 			status.setStatus(StatusType.FAILURE);
-			status.setMessage(e.getMessage());
+			status.setMessage("Registration Failure");
+			return status;
 		}
-		return status;
+		// return status;
 	}
-	
+
 	public static class Status {
 		private StatusType status;
 		private String message;
-		
-		public static enum StatusType{
+
+		public static enum StatusType {
 			SUCCESS, FAILURE;
 		}
 
@@ -56,9 +67,7 @@ public class UserControllerImpl  {
 		public void setMessage(String message) {
 			this.message = message;
 		}
-		
 
 	}
 
 }
-

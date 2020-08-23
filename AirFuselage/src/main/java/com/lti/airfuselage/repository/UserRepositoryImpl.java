@@ -2,39 +2,39 @@ package com.lti.airfuselage.repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
-
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.lti.airfuselage.model.Role;
+import com.lti.airfuselage.model.SystemAdmin;
 import com.lti.airfuselage.model.User;
 
+//@Component
 @Repository
 public class UserRepositoryImpl implements UserRepository {
-	
+
 	@PersistenceContext
 	EntityManager em;
-	
-	@Transactional
+
 	@Override
+	@Transactional
+	public boolean isUserPresent(String email) {
+		return (Long) em.createQuery("select count(u.userId) from User u where u.email =: e")
+				.setParameter("e", email)
+				.getSingleResult() == 1 ? true : false;
+	}
+
+	@Override
+	@Transactional
 	public void add(User user) {
-		
 		em.merge(user);
-		
+
 	}
-	
+
+	@Override
 	@Transactional
-	@Override
-	public void addRole(Role role) {
-		
-		em.merge(role);
-		
-	}
-	@Override
-	public boolean isCustomerPresent(String email) {
-		return (Long) em.createQuery("select count(u.id) from User u where u.email =: e")
-				.setParameter("e", email).getSingleResult() ==1? true:false;
+	public void addAdmin(SystemAdmin admin) {
+		em.merge(admin);
+
 	}
 
 }
-

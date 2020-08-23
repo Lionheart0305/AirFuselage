@@ -7,15 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "AirlineUser")
 public class User {
-	
 
 	@Id
 	@SequenceGenerator(name = "seq_user", allocationSize = 1, initialValue = 100)
@@ -42,10 +39,6 @@ public class User {
 
 	@Column
 	private String mobileNumber;
-
-	@ManyToOne
-	@JoinColumn(name="role_id")
-	private Role role;
 
 	public int getUserId() {
 		return userId;
@@ -110,15 +103,5 @@ public class User {
 	public void setMobileNumber(String mobileNumber) {
 		this.mobileNumber = mobileNumber;
 	}
-
-	public Role getRole() {
-		return role;
-	}
-
-	public void setRole(Role role) {
-		this.role = role;
-	}
-	
-	
 
 }
