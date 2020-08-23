@@ -9,6 +9,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 
+import com.lti.airfuselage.model.SystemAdmin;
 import com.lti.airfuselage.model.User;
 import com.lti.airfuselage.repository.UserRepository;
 
@@ -35,6 +36,19 @@ class AirFuselageApplicationTests {
 		
 		userRepo.add(u);
 		
+	}
+	
+	@Test
+	void addAdmin() {
+		SystemAdmin admin = new SystemAdmin();
+		admin.setFirstName("Rahul");
+		admin.setLastName("Singh");
+		admin.setEmail("rahul@lti");
+		admin.setPassword("456");
+		admin.setDateOfBirth(LocalDate.of(1990, 11, 20));
+		admin.setMobileNumber("9758830865");
+		
+		userRepo.addAdmin(admin);
 	}
 
 }
