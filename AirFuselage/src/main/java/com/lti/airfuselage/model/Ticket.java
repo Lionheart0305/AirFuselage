@@ -16,7 +16,7 @@ import javax.persistence.Table;
 public class Ticket {
 
 	@Id
-	@SequenceGenerator(name = "seq_ticket", allocationSize = 1, initialValue = 1)
+	@SequenceGenerator(name = "seq_ticket", allocationSize = 1, initialValue = 1001)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_ticket")
 	private int ticketId;
 
@@ -32,8 +32,8 @@ public class Ticket {
 	private Passenger passenger;
 
 	@OneToOne
-	@JoinColumn(name = "seat")
-	private Seat seat;
+    @JoinColumn(name = "seat_id")
+    private Seat seat;
 
 	@Column(name = "confirmed", unique = false, nullable = false)
 	private Boolean confirmed;

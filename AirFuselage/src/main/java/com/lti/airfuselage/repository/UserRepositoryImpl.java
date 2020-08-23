@@ -36,5 +36,18 @@ public class UserRepositoryImpl implements UserRepository {
 		em.merge(admin);
 
 	}
+	
+	@Override
+	public User findById(int userId) {
+		return em.find(User.class, userId);
+	}
+	
+	@Override
+	public int login(String email, String password) {
+		return (Integer) em.createQuery("select u.userId from User u where u.email= :e and u.password= :pw")
+				.setParameter("e", email)
+				.setParameter("pw", password)
+				.getSingleResult();
+	}
 
 }

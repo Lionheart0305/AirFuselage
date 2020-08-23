@@ -1,5 +1,9 @@
 package com.lti.airfuselage.controller;
 
+import java.time.LocalDate;
+
+import javax.persistence.Column;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -7,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lti.airfuselage.controller.UserControllerImpl.Status.StatusType;
+import com.lti.airfuselage.dto.LoginDto;
 import com.lti.airfuselage.exception.CustomerServiceException;
 import com.lti.airfuselage.model.User;
 import com.lti.airfuselage.service.UserService;
@@ -42,6 +47,79 @@ public class UserControllerImpl {
 			return status;
 		}
 		// return status;
+	}
+	
+	@PostMapping("/login")
+	public LoginStatus login(@RequestBody LoginDto loginDto) {
+		try {
+			User u=userService.login(loginDto.getEmail(), loginDto.getPassword());
+			LoginStatus loginStatus=new LoginStatus();
+			loginStatus.setStatus(StatusType.SUCCESS);
+			loginStatus.setMessage("Login successful");
+			loginStatus.setUserId(u.getUserId());
+			loginStatus.setFirstName(u.getFirstName());
+			loginStatus.setLastName(u.getLastName());
+			loginStatus.setDateOfBirth(u.getDateOfBirth());
+			loginStatus.setMobileNumber(u.getMobileNumber());
+			return loginStatus;
+		}
+		catch (CustomerServiceException e) {
+			LoginStatus loginStatus=new LoginStatus();
+			loginStatus.setStatus(StatusType.FAILURE);
+			loginStatus.setMessage(e.getMessage());
+			return loginStatus;
+		}
+
+	}
+
+	public static class LoginStatus extends Status {
+
+		private int userId;
+		private String firstName;
+		private String lastName;
+		private LocalDate dateOfBirth;
+		private String mobileNumber;
+
+		public int getUserId() {
+			return userId;
+		}
+
+		public void setUserId(int userId) {
+			this.userId = userId;
+		}
+
+		public String getFirstName() {
+			return firstName;
+		}
+
+		public void setFirstName(String firstName) {
+			this.firstName = firstName;
+		}
+
+		public String getLastName() {
+			return lastName;
+		}
+
+		public void setLastName(String lastName) {
+			this.lastName = lastName;
+		}
+
+		public LocalDate getDateOfBirth() {
+			return dateOfBirth;
+		}
+
+		public void setDateOfBirth(LocalDate dateOfBirth) {
+			this.dateOfBirth = dateOfBirth;
+		}
+
+		public String getMobileNumber() {
+			return mobileNumber;
+		}
+
+		public void setMobileNumber(String mobileNumber) {
+			this.mobileNumber = mobileNumber;
+		}
+
 	}
 
 	public static class Status {

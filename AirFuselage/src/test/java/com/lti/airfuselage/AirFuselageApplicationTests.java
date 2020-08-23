@@ -25,11 +25,11 @@ class AirFuselageApplicationTests {
 	void register() {
 		
 		User u=new User();
-		u.setFirstName("John");
-		u.setLastName("Kale");
-		u.setEmail("john@lti");
-		u.setPassword("12345fsgs");
-		u.setConfirmPassword("12345fsgs");
+		u.setFirstName("Sam");
+		u.setLastName("Munro");
+		u.setEmail("sam@lti");
+		u.setPassword("wefcdfsgs");
+		u.setConfirmPassword("asdcafsgs");
 		u.setDateOfBirth(LocalDate.of(1999, 10, 20));
 		u.setMobileNumber("78451865655");
 		
@@ -49,6 +49,12 @@ class AirFuselageApplicationTests {
 		admin.setMobileNumber("9758830865");
 		
 		userRepo.addAdmin(admin);
+	}
+	
+	@Test
+	void login() {
+		int id=userRepo.login("sahil@lti", "12345");
+		System.out.println(id);
 	}
 
 }
