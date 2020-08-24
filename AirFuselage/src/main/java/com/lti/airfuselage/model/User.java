@@ -32,9 +32,6 @@ public class User {
 	private String password;
 
 	@Column
-	private String confirmPassword;
-
-	@Column
 	private LocalDate dateOfBirth;
 
 	@Column
@@ -78,14 +75,6 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public String getConfirmPassword() {
-		return confirmPassword;
-	}
-
-	public void setConfirmPassword(String confirmPassword) {
-		this.confirmPassword = confirmPassword;
 	}
 
 	public LocalDate getDateOfBirth() {

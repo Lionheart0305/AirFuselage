@@ -22,6 +22,9 @@ public class Flight {
 	@Id
 	@SequenceGenerator(name = "seq_flight", allocationSize = 1, initialValue = 20201)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_flight")
+	private int flightNumber;
+	
+	@Column
 	private int flightId;
 
 	@Column
@@ -30,7 +33,71 @@ public class Flight {
 	@Column
 	private LocalDateTime arrivalTime;
 
+	@Column
+	private String Source;
+
+	@Column
+	private String Destination;
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "flight", cascade = CascadeType.ALL)
 	private List<Ticket> tickets = new ArrayList<Ticket>();
+	
+	
+
+	public int getFlightId() {
+		return flightId;
+	}
+
+	public void setFlightId(int flightId) {
+		this.flightId = flightId;
+	}
+
+	public int getFlightNumber() {
+		return flightNumber;
+	}
+
+	public void setFlightNumber(int flightNumber) {
+		this.flightNumber = flightNumber;
+	}
+
+	public LocalDateTime getDepartureTime() {
+		return departureTime;
+	}
+
+	public void setDepartureTime(LocalDateTime departureTime) {
+		this.departureTime = departureTime;
+	}
+
+	public LocalDateTime getArrivalTime() {
+		return arrivalTime;
+	}
+
+	public void setArrivalTime(LocalDateTime arrivalTime) {
+		this.arrivalTime = arrivalTime;
+	}
+
+	public String getSource() {
+		return Source;
+	}
+
+	public void setSource(String source) {
+		Source = source;
+	}
+
+	public String getDestination() {
+		return Destination;
+	}
+
+	public void setDestination(String destination) {
+		Destination = destination;
+	}
+
+	@Override
+	public String toString() {
+		return "Flight [flightNumber=" + flightNumber + ", departureTime=" + departureTime + ", arrivalTime="
+				+ arrivalTime + ", Source=" + Source + ", Destination=" + Destination + "]";
+	}
+
+	
 
 }

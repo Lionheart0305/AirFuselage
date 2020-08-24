@@ -1,10 +1,12 @@
 package com.lti.airfuselage.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -20,12 +22,15 @@ public class Seat {
 	private int seatId;
 
 	@Column
-	private int row;
+	private int rowValue;
 
 	@Column
-	private int column;
-
-	@Column(unique = false, nullable = false)
+	private int columnValue;
+	
+	@Column
 	private SeatClass seatClass;
+	
+	@OneToOne(mappedBy = "seat",cascade = CascadeType.ALL)
+	private Ticket ticket;
 		
 }
