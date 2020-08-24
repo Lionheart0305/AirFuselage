@@ -22,7 +22,7 @@ public class UserControllerImpl {
 
 	@Autowired
 	private UserService userService;
-//git is working
+
 	// @RequestMapping(path="/register", method = RequestMethod.POST)
 	@PostMapping("/register")
 	public Status register(@RequestBody User user) {
