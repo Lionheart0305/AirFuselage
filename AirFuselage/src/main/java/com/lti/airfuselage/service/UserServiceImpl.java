@@ -5,6 +5,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.lti.airfuselage.exception.CustomerServiceException;
+import com.lti.airfuselage.model.SystemAdmin;
 import com.lti.airfuselage.model.User;
 import com.lti.airfuselage.repository.UserRepository;
 
@@ -29,6 +30,17 @@ public class UserServiceImpl implements UserService {
 		try {
 			int userId = userRepo.login(email, password);
 			User u = userRepo.findById(userId);
+			return u;
+		} catch (EmptyResultDataAccessException e) {
+			throw new CustomerServiceException("Incorrect username/password");
+		}
+	}
+	
+	@Override
+	public SystemAdmin adminlogin(String email, String password) {
+		try {
+			int userId = userRepo.adminlogin(email, password);
+			SystemAdmin u = userRepo.findByadminId(userId);
 			return u;
 		} catch (EmptyResultDataAccessException e) {
 			throw new CustomerServiceException("Incorrect username/password");

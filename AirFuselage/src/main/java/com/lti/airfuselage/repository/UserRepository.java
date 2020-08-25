@@ -14,5 +14,11 @@ public interface UserRepository {
 	int login(String email, String password);
 
 	User findById(int userId);
+	
+	
+
+	int adminlogin(String email, String password);
+
+	SystemAdmin findByadminId(int userId);
 
 }

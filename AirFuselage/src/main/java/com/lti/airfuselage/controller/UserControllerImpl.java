@@ -14,6 +14,7 @@ import com.lti.airfuselage.controller.UserControllerImpl.Status.StatusType;
 import com.lti.airfuselage.dto.AdminLoginDto;
 import com.lti.airfuselage.dto.LoginDto;
 import com.lti.airfuselage.exception.CustomerServiceException;
+import com.lti.airfuselage.model.SystemAdmin;
 import com.lti.airfuselage.model.User;
 import com.lti.airfuselage.service.UserService;
 
@@ -126,11 +127,11 @@ public class UserControllerImpl {
 	@PostMapping("/adminlogin")
 	public AdminLoginStatus Adminlogin(@RequestBody AdminLoginDto adminloginDto) {
 		try {
-			User u=userService.login(adminloginDto.getEmail(), adminloginDto.getPassword());
+			SystemAdmin u=userService.adminlogin(adminloginDto.getEmail(), adminloginDto.getPassword());
 			AdminLoginStatus adminloginStatus=new AdminLoginStatus();
 			adminloginStatus.setStatus(StatusType.SUCCESS);
 			adminloginStatus.setMessage("Login successful");
-			adminloginStatus.setUserId(u.getUserId());
+			adminloginStatus.setUserId(u.getId());
 			adminloginStatus.setFirstName(u.getFirstName());
 			adminloginStatus.setLastName(u.getLastName());
 			adminloginStatus.setDateOfBirth(u.getDateOfBirth());

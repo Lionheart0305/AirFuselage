@@ -43,8 +43,21 @@ public class UserRepositoryImpl implements UserRepository {
 	}
 	
 	@Override
+	public SystemAdmin findByadminId(int id) {
+		return em.find(SystemAdmin.class, id);
+	}
+	
+	@Override
 	public int login(String email, String password) {
 		return (Integer) em.createQuery("select u.userId from User u where u.email= :e and u.password= :pw")
+				.setParameter("e", email)
+				.setParameter("pw", password)
+				.getSingleResult();
+	}
+	
+	@Override
+	public int adminlogin(String email, String password) {
+		return (Integer) em.createQuery("select u.id from SystemAdmin u where u.email= :e and u.password= :pw")
 				.setParameter("e", email)
 				.setParameter("pw", password)
 				.getSingleResult();
