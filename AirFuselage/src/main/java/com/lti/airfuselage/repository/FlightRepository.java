@@ -20,4 +20,7 @@ public interface FlightRepository {
 	
 	boolean isFlightPresent(int flightNumber);
 
+
+	
+
 }

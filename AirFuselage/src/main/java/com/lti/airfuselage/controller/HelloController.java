@@ -21,7 +21,7 @@ public class HelloController {
 	public String hello(@RequestBody User user) {
 		
 		SimpleMailMessage message = new SimpleMailMessage();
-		message.setFrom("Angel.Srivastav@lntinfotech.com");
+		message.setFrom("airfuselage@gmail.com");
 		message.setTo(user.getEmail());
 		message.setSubject("Welcome to Air Fuselage");
 		message.setText("Congratulations you have been successfully registered with Air Fuselage");
@@ -30,3 +30,4 @@ public class HelloController {
 		return "Welcome to Spring REST";
 	}
 }
+

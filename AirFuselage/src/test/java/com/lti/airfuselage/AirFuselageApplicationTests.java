@@ -45,10 +45,10 @@ class AirFuselageApplicationTests {
 	@Test
 	void addAdmin() {
 		SystemAdmin admin = new SystemAdmin();
-		admin.setFirstName("Rahul");
+		admin.setFirstName("Admin");
 		admin.setLastName("Singh");
-		admin.setEmail("rahul@lti");
-		admin.setPassword("456");
+		admin.setEmail("admin@lti");
+		admin.setPassword("Admin");
 		admin.setDateOfBirth(LocalDate.of(1990, 11, 20));
 		admin.setMobileNumber("9758830865");
 

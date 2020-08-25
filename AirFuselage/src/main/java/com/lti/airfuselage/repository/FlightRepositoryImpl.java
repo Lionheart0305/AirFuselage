@@ -9,6 +9,7 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.lti.airfuselage.exception.FlightServiceException;
 import com.lti.airfuselage.model.Flight;
 
 @Repository
@@ -55,7 +56,7 @@ public class FlightRepositoryImpl implements FlightRepository {
 		        }
 		return false;
 	}
-
+	
 	@Override
 	@Transactional
 	public Flight findAFlight(int flightNumber) {

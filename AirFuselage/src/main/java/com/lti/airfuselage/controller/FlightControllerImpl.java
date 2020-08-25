@@ -4,8 +4,10 @@ import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lti.airfuselage.controller.FlightControllerImpl.Status.StatusType;
@@ -45,6 +47,21 @@ public class FlightControllerImpl {
 			return status;
 		}
 	}
+	@PostMapping("/delete")
+	private @ResponseBody Status deleteFlight(@RequestBody int flightNumber) {
+		try {
+			flightService.deleteFlight(flightNumber);
+			status.setStatus(StatusType.SUCCESS);
+			status.setMessage("Flight deleted sucessfully");
+			return status;
+		}
+		catch (FlightServiceException e) {
+			status.setStatus(StatusType.FAILURE);
+			status.setMessage(e.getMessage());
+			return status;
+		}
+	}
+	
 	
 
 	public static class Status {

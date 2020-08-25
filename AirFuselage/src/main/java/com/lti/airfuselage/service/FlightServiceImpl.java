@@ -38,7 +38,11 @@ public class FlightServiceImpl implements FlightService {
 
 	@Override
 	public boolean deleteFlight(int flightNumber) {
-		
+		if(flightRepo.isFlightPresent(flightNumber)) {
+			flightRepo.deleteFlight(flightNumber);
+		}
+		else
+			throw new FlightServiceException("Flight deleted exists");
 		return false;
 	}
 
@@ -48,4 +52,6 @@ public class FlightServiceImpl implements FlightService {
 		return flightRepo.findAFlight(flightNumber);
 	}
 
+
+	
 }
