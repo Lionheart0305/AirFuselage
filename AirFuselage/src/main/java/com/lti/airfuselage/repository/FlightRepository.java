@@ -12,13 +12,15 @@ public interface FlightRepository {
 
 	List<Flight> viewRespectiveFlights(String Source, String Destination);
 
-	boolean updateFlight(Flight flight);
+	Flight updateFlight(Flight flight);
 
-	boolean deleteFlight(int flightNumber);
+	boolean deleteFlight(int flightId);
 
-	Flight findAFlight(int flightNumber);
+	Flight findAFlight(int flightId);
 	
-	boolean isFlightPresent(int flightNumber);
+	boolean isFlightPresent(int flightId);
+
+	List<Flight> findAll();
 
 
 	

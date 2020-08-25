@@ -17,30 +17,40 @@ public class FlightRepositoryImpl implements FlightRepository {
 
 	@PersistenceContext
 	EntityManager em;
-	    
+
 	@Override
 	@Transactional
 	public int add(Flight flight) {
-		Flight u=em.merge(flight);
-		return u.getFlightNumber();
+		Flight u = em.merge(flight);
+		return u.getFlightId();
 	}
 
 	@Override
-	public List<Flight> viewRespectiveFlights(String Source,String Destination) {
+	public List<Flight> viewRespectiveFlights(String Source, String Destination) {
 		String sql = "select f from Flight f where f.Source= :source and f.Destination= :destination";
-        Query qry = em.createQuery(sql);
-        qry.setParameter("source", Source);
-        qry.setParameter("destination", Destination);
-        List<Flight> flight=qry.getResultList();
-        return flight;
+		Query qry = em.createQuery(sql);
+		qry.setParameter("source", Source);
+		qry.setParameter("destination", Destination);
+		List<Flight> flight = qry.getResultList();
+		return flight;
 	}
 
 	@Override
 	@Transactional
-	public boolean updateFlight(Flight flight) {
-		Flight f =em.find(Flight.class, flight.getFlightNumber());
-		if(f!=null){	
+	public Flight updateFlight(Flight flight) {
+		Flight f = em.find(Flight.class, flight.getFlightId());
+		if (f != null) {
 			em.merge(flight);
+		}
+		return flight;
+	}
+
+	@Override
+	@Transactional
+	public boolean deleteFlight(int flightId) {
+		Flight flight = em.find(Flight.class, flightId);
+		if (flight != null) {
+			em.remove(flight);
 			return true;
 		}
 		return false;
@@ -48,28 +58,22 @@ public class FlightRepositoryImpl implements FlightRepository {
 
 	@Override
 	@Transactional
-	public boolean deleteFlight(int flightNumber) {
-		Flight flight = em.find(Flight.class, flightNumber);
-		 if(flight != null) {
-		     em.remove(flight);
-		          return true;
-		        }
-		return false;
-	}
-	
-	@Override
-	@Transactional
-	public Flight findAFlight(int flightNumber) {
-		 Flight flight = em.find(Flight.class, flightNumber);
-	      return flight;
+	public Flight findAFlight(int flightId) {
+		Flight flight = em.find(Flight.class, flightId);
+		return flight;
 	}
 
 	@Override
 	public boolean isFlightPresent(int flightId) {
-		return (Long) em.createQuery("select count(f.flightId) from Flight f where f.flightId =:fn") 
-				.setParameter("fn", flightId) 
-				.getSingleResult() == 1 ? true : false;
+		return (Long) em.createQuery("select count(f.flightId) from Flight f where f.flightId =:fn")
+				.setParameter("fn", flightId).getSingleResult() == 1 ? true : false;
 	}
-	
-}
 
+	@Override
+	public List<Flight> findAll() {
+		Query query = em.createQuery("select f from Flight f");
+		List<Flight> list = query.getResultList();
+		return list;
+	}
+
+}

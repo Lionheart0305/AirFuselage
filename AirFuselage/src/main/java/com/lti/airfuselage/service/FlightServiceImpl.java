@@ -26,20 +26,18 @@ public class FlightServiceImpl implements FlightService {
 
 	@Override
 	public List<Flight> viewRespectiveFlights(String Source, String Destination) {
-		// TODO Auto-generated method stub
-		return null;
+		return flightRepo.viewRespectiveFlights(Source, Destination);
 	}
 
 	@Override
-	public boolean updateFlight(Flight flight) {
-		// TODO Auto-generated method stub
-		return false;
+	public Flight updateFlight(Flight flight) {
+		return flightRepo.updateFlight(flight);
 	}
 
 	@Override
-	public boolean deleteFlight(int flightNumber) {
-		if(flightRepo.isFlightPresent(flightNumber)) {
-			flightRepo.deleteFlight(flightNumber);
+	public boolean deleteFlight(int flightId) {
+		if(flightRepo.isFlightPresent(flightId)) {
+			flightRepo.deleteFlight(flightId);
 		}
 		else
 			throw new FlightServiceException("Flight deleted exists");
@@ -50,6 +48,11 @@ public class FlightServiceImpl implements FlightService {
 	public Flight findAFlight(int flightNumber) {
 		
 		return flightRepo.findAFlight(flightNumber);
+	}
+	
+	@Override
+	public List<Flight> findAll() {
+		return flightRepo.findAll();
 	}
 
 

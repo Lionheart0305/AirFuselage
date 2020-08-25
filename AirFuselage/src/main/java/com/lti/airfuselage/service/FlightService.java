@@ -10,10 +10,12 @@ public interface FlightService {
 
 	List<Flight> viewRespectiveFlights(String Source, String Destination);
 
-	boolean updateFlight(Flight flight);
+	Flight updateFlight(Flight flight);
 
-	Flight findAFlight(int flightNumber);
+	Flight findAFlight(int flightId);
 
-	boolean deleteFlight(int flightNumber);
+	boolean deleteFlight(int flightId);
+
+	List<Flight> findAll();
 
 }

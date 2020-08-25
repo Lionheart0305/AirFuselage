@@ -81,7 +81,6 @@ class AirFuselageApplicationTests {
 	@Test
 	public void updateFlight() {
 		Flight f = new Flight();
-		f.setFlightNumber(20202);
 		f.setDepartureTime(LocalDateTime.of(2020, 9, 2, 11, 00));
 		f.setArrivalTime(LocalDateTime.of(2020, 9, 2, 13, 30));
 		f.setSource("Delhi");
